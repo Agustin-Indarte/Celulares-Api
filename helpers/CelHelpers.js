@@ -1,7 +1,6 @@
-const {validationResult} = require('express-validator'); // Controlador de validaciones
 const fs = require('fs-extra'); // Librería para manejar archivos
 const path = require('path'); 
-const {v4: uuidv4} = require('uuid'); // Generador de IDs únicos
+
 
 const CelularPath = path.join(__dirname, '../data/celulares.json'); // Ruta del archivo JSON
 
@@ -13,8 +12,8 @@ const readCelulares = async () => { // Función para leer los celulares desde el
 }
 
 
-const writeCelulares = async (celulares) => { // Función para escribir los celulares en el archivo JSON
-    await fs.writeFile(CelularPath,celulares)
+const writeCelulares = async (celulares) => {
+    await fs.writeFile(CelularPath, JSON.stringify(celulares, null, 2), 'utf8');
 }
 
 module.exports = {

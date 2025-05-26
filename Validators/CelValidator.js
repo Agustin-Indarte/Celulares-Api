@@ -21,8 +21,7 @@ const precioValidator = body('precio')
 const ColorValidator = body('color')
     .isLength({ min: 3, max: 20 })
     .withMessage('El color debe tener entre 3 y 20 caracteres')
-    .isIn(["Negro", "Plata", "Azul", "Verde"])
-    .withMessage('El color debe ser uno de los siguientes: Negro, Plata, Azul, Verde');
+    
 
 const AlmacenamientoValidator = body('almacenamiento')
     .notEmpty()

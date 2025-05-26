@@ -1,20 +1,15 @@
 var express = require('express');
+const { createValidatorCelular,updateValidatorCelular } = require('../Validators/CelValidator'); // Importamos el middleware de validación
+const { getAllCels, getCelById, createCel, updateCel } = require('../Controllers/CelController'); // Importamos la función para obtener todos los celulares
 var router = express.Router();
-const { getAllCels } = require('../Controllers/CelController'); // Importamos la función para obtener todos los celulares
 
 /* GET home page. */
-router.get('/', async function(req, res, next) {
-  try {
-    const celulares = await getAllCels();
-    if (!celulares || celulares.length === 0) {
-      return res.status(404).json({ message: 'No se encontraron celulares' });
-    }
-    // Si se encontraron celulares, los retornamos en formato JSON
-    res.json(celulares);
-  } catch (error) {
-    console.log(error);
-    res.status(500).json({ error: 'Error al obtener los celulares' });
-  }
-});
+router.get('/', getAllCels); 
+
+router.get('/:id', getCelById);
+
+router.post('/', createValidatorCelular, createCel);
+
+router.put('/:id', updateValidatorCelular, updateCel);
 
 module.exports = router;

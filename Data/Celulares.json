@@ -30,5 +30,13 @@
     "color": "Verde",
     "almacenamiento": "256GB",
     "cantidad": 5
+  },
+  {
+    "id": "31bc6b27-ec40-4e20-80ea-581f78a1cfd1",
+    "nombre": "Nuevo Celularrrrr",
+    "precio": 100,
+    "color": "Negro",
+    "almacenamiento": "64GB",
+    "cantidad": 10
   }
 ]
