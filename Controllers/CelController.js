@@ -1,14 +1,14 @@
-const { readCelulares,writeCelulares } = require('../helpers/CelHelpers');
-const {v4:uuidv4} = require('uuid');
+const { readCelulares, writeCelulares } = require('../helpers/CelHelpers');
+const { v4: uuidv4 } = require('uuid');
 const { validationResult } = require('express-validator');
 
 // Funciones para manejar las operaciones CRUD de celulares
 
 // Controlador para obtener todos los celulares
-const getAllCels = async (req, res) =>{
+const getAllCels = async (req, res) => {
     try {
         const celulares = await readCelulares();
-        res.status(200).json(celulares); 
+        res.status(200).json(celulares);
     } catch (error) {
         res.status(500).json({ message: 'Error al obtener los celulares' });
     }
@@ -57,7 +57,7 @@ const createCel = async (req, res) => {
     } catch (error) {
         console.log(error);
         return res.status(500).json({ message: 'Error al crear el celular' });
-        
+
     }
 }
 
@@ -79,11 +79,11 @@ const updateCel = async (req, res) => {
 
     const updatedCelular = {
         ...celulares[index],
-        nombre:nombre || celulares[index].nombre,
-        precio:precio || celulares[index].precio,
-        color:color || celulares[index].color,
-        almacenamiento:almacenamiento || celulares[index].almacenamiento,
-        cantidad:cantidad || celulares[index].cantidad
+        nombre: nombre || celulares[index].nombre,
+        precio: precio || celulares[index].precio,
+        color: color || celulares[index].color,
+        almacenamiento: almacenamiento || celulares[index].almacenamiento,
+        cantidad: cantidad || celulares[index].cantidad
     };
 
     celulares[index] = updatedCelular;
@@ -98,7 +98,7 @@ const updateCel = async (req, res) => {
 
 const deleteCel = async (req, res) => {
     try {
-        
+
         const celulares = await readCelulares();
 
         const index = celulares.findIndex(c => c.id === req.params.id);
@@ -112,14 +112,63 @@ const deleteCel = async (req, res) => {
     } catch (error) {
         console.log(error);
         res.status(500).json({ message: 'Error al eliminar el celular' });
-        
+
     }
 }
+
+// Funcion para buscar un celular por filtros
+const findCelByFilters = async (req, res) => {
+    try {
+        const celulares = await readCelulares();
+
+        let filteredCels = celulares;
+
+        //Filtros
+
+        if (req.query.nombre) {
+            filteredCels = filteredCels.filter(c => c.nombre.toLowerCase().includes(req.query.nombre.toLowerCase()));
+
+        }
+
+        if (req.query.precio) {
+            filteredCels = filteredCels.filter(c => c.precio <= parseFloat(req.query.precio));
+
+        }
+
+        if (req.query.color) {
+            filteredCels = filteredCels.filter(c => c.color.toLowerCase() === req.query.color.toLowerCase());
+
+        }
+
+        if (req.query.almacenamiento) {
+            filteredCels = filteredCels.filter(c => c.almacenamiento.toLowerCase() === req.query.almacenamiento.toLowerCase());
+
+        }
+
+        if (req.query.cantidad) {
+            filteredCels = filteredCels.filter(c => c.cantidad >= parseInt(req.query.cantidad));
+
+        }
+
+        if (filteredCels.length === 0) {
+            return res.status(404).json({ message: 'No se encontraron celulares con los filtros especificados' });
+        }
+
+        res.status(200).json(filteredCels);
+
+    } catch (error) {
+        console.log(error);
+        res.status(500).json({ message: 'Error al buscar el celular' });
+    }
+}
+
+
 
 module.exports = {
     getAllCels,
     getCelById,
     createCel,
     updateCel,
-    deleteCel
+    deleteCel,
+    findCelByFilters
 };
