@@ -71,6 +71,60 @@ Celulares-Api/
 - Buscar celulares por filtros:
   - `GET /celulares?nombre=Samsung&color=Negro`
 
+## Cómo probar la API con Postman
+
+1. **Inicia el servidor**
+   - Asegúrate de tener el proyecto corriendo con `npm start` o el comando que uses.
+
+2. **Configura la URL base**
+   - Por defecto suele ser: `http://localhost:3000/celulares` (ajusta el puerto si es diferente en tu proyecto).
+
+3. **Ejemplos de requests:**
+
+- **Obtener todos los celulares**
+  - Método: `GET`
+  - URL: `http://localhost:3000/celulares`
+
+- **Obtener un celular por ID**
+  - Método: `GET`
+  - URL: `http://localhost:3000/celulares/ID_DEL_CELULAR`
+
+- **Crear un celular**
+  - Método: `POST`
+  - URL: `http://localhost:3000/celulares`
+  - Body (JSON):
+    ```json
+    {
+      "nombre": "Samsung Galaxy S23",
+      "precio": 950,
+      "color": "Negro",
+      "almacenamiento": "256GB",
+      "cantidad": 10
+    }
+    ```
+
+- **Actualizar un celular**
+  - Método: `PUT`
+  - URL: `http://localhost:3000/celulares/ID_DEL_CELULAR`
+  - Body (JSON):
+    ```json
+    {
+      "nombre": "Nuevo Nombre",
+      "precio": 1000
+    }
+    ```
+
+- **Eliminar un celular**
+  - Método: `DELETE`
+  - URL: `http://localhost:3000/celulares/ID_DEL_CELULAR`
+
+- **Buscar celulares por filtros**
+  - Método: `GET`
+  - URL: `http://localhost:3000/celulares?nombre=Samsung&color=Negro`
+
+4. **Verifica las respuestas**
+   - Postman mostrará la respuesta JSON de la API. Si hay errores de validación, también se mostrarán en la respuesta.
+
 ---
 
 Si vuelves a este proyecto en el futuro, revisa este README y los comentarios en los controladores para entender rápidamente la estructura y el flujo de la aplicación.
