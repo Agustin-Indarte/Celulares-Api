@@ -94,9 +94,32 @@ const updateCel = async (req, res) => {
     });
 }
 
+// Funcion para eliminar un celular por su ID
+
+const deleteCel = async (req, res) => {
+    try {
+        
+        const celulares = await readCelulares();
+
+        const index = celulares.findIndex(c => c.id === req.params.id);
+        if (index === -1) {
+            return res.status(404).json({ message: 'Celular no encontrado' });
+        }
+
+        celulares.splice(index, 1);
+        await writeCelulares(celulares);
+        res.status(200).json({ message: 'Celular eliminado exitosamente' });
+    } catch (error) {
+        console.log(error);
+        res.status(500).json({ message: 'Error al eliminar el celular' });
+        
+    }
+}
+
 module.exports = {
     getAllCels,
     getCelById,
     createCel,
-    updateCel
+    updateCel,
+    deleteCel
 };
