@@ -1,0 +1,2 @@
+26 de mayo de 2025, 16:35:59 - GET /api/Celulares
+26 de mayo de 2025, 16:36:00 - GET /api/Celulares

@@ -22,6 +22,9 @@ Celulares-Api/
 ├── Validators/
 │   └── CelValidator.js          # Validaciones de datos para crear/actualizar celulares
 │
+├── Middlewares/
+│   └── logger.js                # Middleware para registro de solicitudes HTTP
+│
 ├── package.json                 # Dependencias y scripts del proyecto
 └── README.md                    # Documentación del proyecto
 ```
@@ -48,6 +51,9 @@ Celulares-Api/
 
 - **Validators/CelValidator.js**
   - Define las validaciones para los datos de entrada al crear o actualizar un celular.
+
+- **Middlewares/logger.js**
+  - Middleware que registra todas las solicitudes HTTP en un archivo de log (`logs/logs.txt`). Útil para auditoría y depuración, ya que guarda la fecha, método y URL de cada request recibida.
 
 ## ¿Cómo funciona?
 
